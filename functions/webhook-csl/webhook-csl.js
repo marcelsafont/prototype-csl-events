@@ -2,15 +2,14 @@
 const fetch = (...args) => import(`node-fetch`).then(({ default: fetch }) => fetch(...args));
 const handler = async (event) => {
   try {
-    const requestRebuild = await fetch('https://api.netlify.com/build_hooks/65f6ba06846e7c618ca4227d', {
+    await fetch('https://api.netlify.com/build_hooks/65f6ba06846e7c618ca4227d', {
       method: 'POST',
-      body: JSON.stringify({}),
-    
     });
+    return { statusCode: 200, body: 'success' }
     //const responseRebuild = await requestRebuild.text();
     // console.log(responseRebuild);
   } catch (error) {
-    return { statusCode: 500, body: error.toString() }
+    return { statusCode: 500, body: 'error' }
   }
 }
 
